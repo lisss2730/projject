@@ -1,0 +1,54 @@
+from PyQt5.QtWidgets import *
+
+app = QApplication([])
+win = QWidget()
+
+line = QVBoxLayout()
+win.setLayout(line)
+
+line1 = QHBoxLayout()
+line.addLayout(line1)
+
+line2 = QHBoxLayout()
+line.addLayout(line2)
+
+text = QLabel('здесь должен быть текст')
+line1.addWidget(text)
+
+b1 = QPushButton('Ввести текст')
+line2.addWidget(b1)
+
+#b2 = QPushButton('Поменять цвет текста')
+#line2.addWidget(b2)
+
+
+def texxt():
+    txt, ok = QInputDialog.getText(win, "ggjhgjg", "Введите текст")
+    if ok:
+        text.setText(str(txt))
+
+b1.clicked.connect(texxt)
+
+
+slide = QSlider()
+line2.addWidget(slide)
+
+
+def changeVal(value):
+    print(value)
+    text.setStyleSheet("QLabel{font-size:"+str(value)+"px}")
+slide.valueChanged[int].connect(changeVal)
+
+
+#def color():
+#    col = QColorDialog.getColor()
+#    if col.isValid():
+#        win.setStyleSheet('QLabel(color: %s)'%col.name())
+#
+#b2.clicked.connect(color)
+
+
+
+
+win.show()
+app.exec_()
